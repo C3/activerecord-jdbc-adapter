@@ -38,6 +38,7 @@ import arjdbc.mysql.MySQLRubyJdbcConnection;
 import arjdbc.oracle.OracleRubyJdbcConnection;
 import arjdbc.postgresql.PostgresqlRubyJdbcConnection;
 import arjdbc.sqlite3.Sqlite3RubyJdbcConnection;
+import arjdbc.teradata.TeradataRubyJdbcConnection;
 
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
@@ -59,6 +60,7 @@ public class AdapterJavaService implements BasicLibraryService {
         H2RubyJdbcConnection.createH2JdbcConnectionClass(runtime, jdbcConnection);
         MySQLRubyJdbcConnection.createMySQLJdbcConnectionClass(runtime, jdbcConnection);
         DB2RubyJdbcConnection.createDB2JdbcConnectionClass(runtime, jdbcConnection);
+        TeradataRubyJdbcConnection.createTeradataJdbcConnectionClass(runtime, jdbcConnection);
         RubyModule arJdbc = runtime.getOrCreateModule("ArJdbc");
         rubyApi = JavaEmbedUtils.newObjectAdapter();
         MySQLModule.load(arJdbc);
