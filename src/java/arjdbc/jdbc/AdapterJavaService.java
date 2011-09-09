@@ -43,6 +43,7 @@ import arjdbc.oracle.OracleRubyJdbcConnection;
 import arjdbc.postgresql.PostgresqlRubyJdbcConnection;
 import arjdbc.sqlite3.SQLite3Module;
 import arjdbc.sqlite3.SQLite3RubyJdbcConnection;
+import arjdbc.teradata.TeradataRubyJdbcConnection;
 
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
@@ -62,7 +63,7 @@ public class AdapterJavaService implements BasicLibraryService {
         H2RubyJdbcConnection.createH2JdbcConnectionClass(runtime, jdbcConnection);
         MySQLRubyJdbcConnection.createMySQLJdbcConnectionClass(runtime, jdbcConnection);
         DB2RubyJdbcConnection.createDB2JdbcConnectionClass(runtime, jdbcConnection);
-        // ArJdbc :
+        TeradataRubyJdbcConnection.createTeradataJdbcConnectionClass(runtime, jdbcConnection);
         RubyModule arJdbc = runtime.getOrCreateModule("ArJdbc");
         MySQLModule.load(arJdbc);
         MSSQLModule.load(arJdbc);
@@ -73,5 +74,5 @@ public class AdapterJavaService implements BasicLibraryService {
         DB2Module.load(arJdbc);
         return true;
     }
-    
+
 }
