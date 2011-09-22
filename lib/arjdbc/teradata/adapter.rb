@@ -39,7 +39,7 @@ module ::ArJdbc
         if rest_of_query[0] == "1"
           rest_of_query[0] = "*"
         end
-        if rest_of_query[0] == "*"
+        if rest_of_query.chars.first == "*"
           from_table = get_table_name(rest_of_query)
           rest_of_query = from_table + '.' + rest_of_query
         end
