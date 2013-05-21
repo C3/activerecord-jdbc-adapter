@@ -16,6 +16,12 @@ module ::ArJdbc
       tp
     end
 
+    def self.arel2_visitors(config)
+      require 'arel/visitors/teradata'
+      visitors = ::Arel::Visitors::Teradata
+      { 'teradata' => visitors, 'jdbcteradata' => visitors }
+    end
+
   end
 end
 
