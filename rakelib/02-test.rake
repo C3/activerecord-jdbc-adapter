@@ -27,7 +27,7 @@ def declare_test_task_for(adapter, options = {})
   task "test_#{adapter}_pre" do
     unless (ENV['BUNDLE_GEMFILE'] rescue '') =~ /gemfiles\/.*?\.gemfile/
       appraisals = []; Appraisal::File.each { |file| appraisals << file.name }
-      puts "Specify AR version with `rake appraisal:{version} test_#{adapter}'" + 
+      puts "Specify AR version with `rake appraisal:{version} test_#{adapter}'" +
            " where version=(#{appraisals.join('|')})"
     end
   end
@@ -77,7 +77,7 @@ task :test_postgresql => [:test_postgres]
 task :test_pgsql => [:test_postgres]
 
 # Ensure driver for these DBs is on your classpath
-%w(oracle db2 cachedb informix).each do |d|
+%w(oracle db2 cachedb informix teradata).each do |d|
   Rake::TestTask.new("test_#{d}") do |t|
     t.test_files = FileList["test/#{d}*_test.rb"]
     t.libs = []
