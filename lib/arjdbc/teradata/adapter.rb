@@ -12,6 +12,7 @@ module ::ArJdbc
     end
 
     def modify_types(tp)
+      tp[:primary_key] = 'int not null'
       tp[:integer][:limit] = nil
       tp
     end
