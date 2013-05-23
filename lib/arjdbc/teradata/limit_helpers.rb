@@ -22,8 +22,12 @@ module ArJdbc
               from_table = Utils.get_table_name(rest_of_query, true)
               rest_of_query = from_table + '.' + rest_of_query
             end
-            new_sql = "#{select} t.* FROM (SELECT ROW_NUMBER() OVER(#{order}) AS _row_num, #{rest_of_query}"
-            new_sql << ") AS t WHERE t._row_num BETWEEN #{start_row.to_s} AND #{end_row.to_s}"
+            # teradata 12
+            new_sql = "SELECT ROW_NUMBER() OVER(ORDER BY #{order}) AS _row_num, #{rest_of_query}"
+            new_sql << " QUALIFY _row_num BETWEEN #{start_row.to_s} AND #{end_row.to_s}"
+            # teradata 13+
+            # new_sql = "#{select} t.* FROM (SELECT ROW_NUMBER() OVER(#{order}) AS _row_num, #{rest_of_query}"
+            # new_sql << ") AS t WHERE t._row_num BETWEEN #{start_row.to_s} AND #{end_row.to_s}"
             sql.replace(new_sql)
           end
           sql
